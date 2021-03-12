@@ -1,1 +1,1 @@
-# CodigoSucio
+Ejemplo para refactorizar código
