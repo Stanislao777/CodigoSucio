@@ -1,1 +1,1 @@
-Ejemplo para refactorizarigo de una pequeña agenda telefónica en C#
+Ejemplo para refactorizarción de una pequeña agenda telefónica en C#
