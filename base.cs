@@ -45,7 +45,7 @@ public class Agenda
         // pedir el  
         
         //correo
-        Console.WriteLine("ingrese el Correo");
+        Console.WriteLine("ingrese el Correo, por favor");
         correo  = (Console.ReadLine());
         if (correo.Length < 1)
             correo  = "no definio el correo";   
