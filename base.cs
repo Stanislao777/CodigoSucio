@@ -45,7 +45,7 @@ public class Agenda
         // pedir el  
         
         //correo
-        Console.WriteLine("ingrese el Correo para verificar por favor");
+        Console.WriteLine("ingrese el Correo del contacto por favor");
         correo  = (Console.ReadLine());
         if (correo.Length < 1)
             correo  = "no definio el correo";   
