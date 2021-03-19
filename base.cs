@@ -1,72 +1,52 @@
-using System; 
-using System.Collections.Generic; 
-using System.Linq; 
-using System.Text; 
- 
+﻿using System; using System.Collections.Generic; using System.Linq; 
+using System.Text;
 
 public class Agenda
 {
-
+    const int TAM_MINIMO_CADENA = 1;
+    const int TAM_MINIMO_TELEFONO = 8;
     public string nombre;
     public string apellido;
     public string telefono;
     public string correo;
-    
-    //sobrecargar
-    public Agenda(string pnombre, string papellido, string ptelefono, string pcorreo)
+
+    public Agenda(string _nombre, string _apellido, string _telefono, string _correo)
     {
-        nombre = pnombre;
-        apellido  = papellido;
-        telefono  = ptelefono;
-        correo = pcorreo;
-
+        nombre = validarTamString(_nombre, TAM_MINIMO_CADENA, "Error sin_nombre");
+        apellido  = validarTamString(_apellido, TAM_MINIMO_CADENA, "Error el usuario no definio el apellido");
+        telefono  = validarTamString(_telefono, TAM_MINIMO_TELEFONO, "Error el telefono esta incompleto");
+        correo = validarTamString(_correo, TAM_MINIMO_CADENA, "no definio el correo");
     }
-    //haciendo uso de la sobrecarga e intercambio con el usuario
-    public Agenda(string pnombre)
+    public string validarTamString(string cadena, int tamMinimo, string errorMessage)
     {
-        Console.WriteLine("ingrese el nombre:");
-        nombre = (Console.ReadLine());
-        if (nombre.Length < 1)
-            nombre = "Error sin_nombre";
-        else pnombre = nombre;
-        //pedir el apellido y validarlo
-        Console.WriteLine("ingrese el apellido");
-        apellido  = (Console.ReadLine());
-        if (apellido.Length < 1)
-            
-            apellido  = " Error el usuario no definio el apellido";     
-
-        // pedir el telefono y validarlo
-
-        Console.WriteLine("ingrese el numero de telefono de  8 digitos");
-        telefono = (Console.ReadLine());
-        if (telefono.Length < 8)
-            telefono = "Error el telefono esta incompleto";
-        // pedir el  
-        
-        //correo
-        Console.WriteLine("ingrese el Correo, por favor");
-        correo  = (Console.ReadLine());
-        if (correo.Length < 1)
-            correo  = "no definio el correo";   
+        cadena = cadena.Length < tamMinimo? errorMessage: cadena;
+        return cadena;
     }
-
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendFormat("\n \nNOMBRE:{0}, APELLIDO:{1}, TELEFONO:{2}, CORREO:{3}", nombre, apellido, telefono, correo);
-        return (sb.ToString());
+        return $"\n \nNOMBRE:{nombre}, APELLIDO:{apellido}, TELEFONO:{telefono}, CORREO:{correo}";
     }
-
+}
+class Program{
+    static public string pedirCadenaDeConsola(string mensajePedido)
+    {
+        Console.WriteLine(mensajePedido);
+        return Console.ReadLine();
+    }
     static void Main(string[] args)
-    {//aplicando foreground para color
+    {   //aplicando foreground para color
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine(" \t Agenda");
-        Console.WriteLine();
+        Console.WriteLine(" \t Agenda\n");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        
-        Agenda cliente = new Agenda("");
+
+        string nombre = pedirCadenaDeConsola("ingrese el nombre:");
+        string apellido = pedirCadenaDeConsola("ingrese el apellido:");
+        string telefono = pedirCadenaDeConsola("ingrese el numero de telefono de  8 digitos:");
+        string correo = pedirCadenaDeConsola("ingrese el Correo:");
+
+        Agenda cliente = new Agenda(nombre, apellido, telefono, correo);
         Console.WriteLine(cliente.ToString());
+
         Console.WriteLine();
         Console.ReadKey();
     }
